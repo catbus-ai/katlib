@@ -1,3 +1,4 @@
-# This project uses only Python standard library
+# This project uses Python standard library and tkinter
 # No external dependencies required
-# Python 3.x is required 
+# Python 3.x is required
+# tkinter is included with Python installation 

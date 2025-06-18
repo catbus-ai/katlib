@@ -8,25 +8,38 @@ This is a special K-pop themed Mad Libs game where you create an exciting story 
 
 ## 🚀 How to Play
 
+### Command Line Version
 1. Make sure you have Python installed on your computer
 2. Run the game by typing this in your terminal:
    ```bash
    python madlibs.py
    ```
-3. The game will ask you for different types of words:
-   - Your name
-   - Your sister/friend's name
-   - A city (Seoul or Tokyo)
-   - An adjective to describe your mood
-   - A piece of K-pop merch (like lightstick or hoodie)
-   - A snack
-   - A silly dance move
-   - An embarrassing sound (like burp or squeak)
-   - A weird object you could carry
-   - A KATSEYE member's name
-   - Your favorite emoji
 
-4. After you enter all the words, the game will create a funny concert adventure story using your words!
+### GUI Version (Recommended for Kids!)
+1. Make sure you have Python installed on your computer
+2. Run the colorful GUI version by typing this in your terminal:
+   ```bash
+   python madlibs_gui.py
+   ```
+3. A beautiful pink window will open where you can:
+   - Type your answers in the pink input boxes
+   - Click the sparkly "Create My Story!" button
+   - Read your story in the scrollable pink text area
+
+The game will ask you for different types of words:
+- Your name
+- Your sister/friend's name
+- A city (Seoul or Tokyo)
+- An adjective to describe your mood
+- A piece of K-pop merch (like lightstick or hoodie)
+- A snack
+- A silly dance move
+- An embarrassing sound (like burp or squeak)
+- A weird object you could carry
+- A KATSEYE member's name
+- Your favorite emoji
+
+After you enter all the words, the game will create a funny concert adventure story using your words!
 
 ## 🎯 Example
 
@@ -61,6 +74,7 @@ This game teaches you about:
 - Basic Python syntax
 - How to make computers interactive
 - How to create fun, interactive stories
+- Basic GUI programming with tkinter
 
 ## 🧪 Testing the Game
 
