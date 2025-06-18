@@ -46,14 +46,32 @@ pip install -r requirements_slack.txt
 ```
 
 ### 4. Environment Variables
-Create a `.env` file:
+Copy the example file and fill in your tokens:
+```bash
+cp .env.example .env
+```
+
+Then edit `.env` with your actual Slack app tokens:
 ```bash
 SLACK_BOT_TOKEN=xoxb-your-bot-token
 SLACK_SIGNING_SECRET=your-signing-secret
 SLACK_APP_TOKEN=xapp-your-app-token
 ```
 
-### 5. Run the System
+### 5. Quick Start (Recommended)
+**Run the quick start checker:**
+```bash
+python quick_start.py
+```
+
+This will verify all prerequisites and guide you through any missing setup steps.
+
+**Create demo data (optional):**
+```bash
+python demo_data.py
+```
+
+### 6. Run the System
 **Start Slack Bot:**
 ```bash
 python slack_bot.py
