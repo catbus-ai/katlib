@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 from io import StringIO
-import madlibs
+import katlibs
 
 class TestMadLibs(unittest.TestCase):
     def test_welcome_message(self):
@@ -34,7 +34,7 @@ class TestMadLibs(unittest.TestCase):
         # Capture the output
         with patch('sys.stdout', new=StringIO()) as fake_output:
             # Run the main program
-            madlibs.play_madlibs()
+            katlibs.play_madlibs()
             
             # Get the output
             output = fake_output.getvalue()
