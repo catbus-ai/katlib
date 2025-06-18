@@ -2,8 +2,12 @@
 
 Welcome to the team! Here is how the team is structured with a little bit of a bio for each member:
 
-* Lara (CEO) - Our fearless leader who brings the vision and energy of a K-pop star to every project. Just like KATSEYE's Lara, she's known for her powerful leadership and ability to bring people together.
-  - Slack: @lara.ceo
+* Shay (CEO) - Our fearless leader who brings the vision!
+  - Slack: @shay.ceo
+  - Tenure: 3 years (Founding Member)
+
+* Lara (CTO) - The technical genius of the company, she strives for cutting edge development! Just like KATSEYE's Lara, she's known for her powerful leadership and ability to bring people together.
+  - Slack: @lara.cto
   - Tenure: 3 years (Founding Member)
 
 * Sophia (CFO) - The financial wizard of our team, keeping our numbers as clean as a K-pop dance routine. Like KATSEYE's Sophia, she's known for her precision and attention to detail.
