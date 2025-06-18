@@ -36,19 +36,11 @@ Katlib is a creative coding game that combines the fun of Mad Libs with the exci
 
 ## Contributing 🌟
 
-We love contributions! Whether you're a coding newbie or a K-pop expert, there's a place for you in our community. Check out our `CONTRIBUTING.md` file to learn how you can help make Katlib even better!
+We love contributions! Whether you're a coding newbie or a K-pop expert, there's a place for you in our community.
 
 ## About Katbus 🏢
 
 Katlib is created by Katbus, a company dedicated to making coding education as exciting as a K-pop concert! Learn more about us in our `history.md` file.
-
-## License 📝
-
-This project is licensed under the MIT License - see the `LICENSE` file for details.
-
-## Support 💖
-
-Need help? Found a bug? Want to suggest a new feature? Open an issue or reach out to our team!
 
 ---
 
