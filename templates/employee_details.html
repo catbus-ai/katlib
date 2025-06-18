@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ employee.employee_name }} - Onboarding Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .step-completed { color: #00CEC9; }
+        .step-in-progress { color: #F8B500; }
+        .step-pending { color: #DDD; }
+        .timeline-item {
+            border-left: 3px solid #6C5CE7;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #6C5CE7;
+        }
+        .timeline-item.completed::before { background: #00CEC9; }
+        .timeline-item.in-progress::before { background: #F8B500; }
+    </style>
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">🎵 Katbus Onboarding Dashboard</a>
+            <span class="navbar-text">{{ employee.employee_name }} Details</span>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Employee Overview -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ employee.employee_name }}</h2>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <strong>Progress:</strong>
+                                <div class="progress mt-1">
+                                    <div class="progress-bar" style="width: {{ employee.completion_percentage }}%">
+                                        {{ "%.0f"|format(employee.completion_percentage) }}%
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <strong>Current Step:</strong><br>
+                                {% if employee.current_step > 8 %}
+                                    <span class="badge bg-success">✅ Complete</span>
+                                {% else %}
+                                    <span class="badge bg-warning">Step {{ employee.current_step }}/8</span>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-3">
+                                <strong>Started:</strong><br>
+                                {{ employee.start_date[:10] }}
+                            </div>
+                            <div class="col-md-3">
+                                <strong>Last Activity:</strong><br>
+                                {{ employee.last_activity[:10] }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step Progress Timeline -->
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Onboarding Progress</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="timeline">
+                            <div class="timeline-item {% if employee.step_1_github %}completed{% elif employee.current_step == 1 %}in-progress{% endif %}">
+                                <h6>1. Create GitHub Account 🚀</h6>
+                                <p class="text-muted">Set up GitHub account for code collaboration</p>
+                                <span class="badge {% if employee.step_1_github %}bg-success{% else %}bg-secondary{% endif %}">
+                                    {% if employee.step_1_github %}✅ Complete{% else %}⏳ Pending{% endif %}
+                                </span>
+                            </div>
+
+                            <div class="timeline-item {% if employee.step_2_environment %}completed{% elif employee.current_step == 2 %}in-progress{% endif %}">
+                                <h6>2. Development Environment Setup 💻</h6>
+                                <p class="text-muted">Install and configure coding environment</p>
+                                <span class="badge {% if employee.step_2_environment %}bg-success{% else %}bg-secondary{% endif %}">
+                                    {% if employee.step_2_environment %}✅ Complete{% else %}⏳ Pending{% endif %}
+                                </span>
+                            </div>
+
+                            <div class="timeline-item {% if employee.step_3_history_quiz >= 3 %}completed{% elif employee.current_step == 3 %}in-progress{% endif %}">
+                                <h6>3. Learn Katbus History 📚</h6>
+                                <p class="text-muted">Test knowledge of company background</p>
+                                <span class="badge {% if employee.step_3_history_quiz >= 3 %}bg-success{% else %}bg-secondary{% endif %}">
+                                    {% if employee.step_3_history_quiz >= 3 %}✅ Complete ({{ employee.step_3_history_quiz }}/4){% else %}📝 {{ employee.step_3_history_quiz }}/4{% endif %}
+                                </span>
+                            </div>
+
+                            <div class="timeline-item {% if employee.step_4_product_quiz >= 2 %}completed{% elif employee.current_step == 4 %}in-progress{% endif %}">
+                                <h6>4. Understand Our Product 🎮</h6>
+                                <p class="text-muted">Learn about Katlib and educational mission</p>
+                                <span class="badge {% if employee.step_4_product_quiz >= 2 %}bg-success{% else %}bg-secondary{% endif %}">
+                                    {% if employee.step_4_product_quiz >= 2 %}✅ Complete ({{ employee.step_4_product_quiz }}/3){% else %}📝 {{ employee.step_4_product_quiz }}/3{% endif %}
+                                </span>
+                            </div>
+
+                            <div class="timeline-item {% if employee.step_5_team_integration %}completed{% elif employee.current_step == 5 %}in-progress{% endif %}">
+                                <h6>5. Join the Team 👥</h6>
+                                <p class="text-muted">Add information to team structure</p>
+                                <span class="badge {% if employee.step_5_team_integration %}bg-success{% else %}bg-secondary{% endif %}">
+                                    {% if employee.step_5_team_integration %}✅ Complete{% else %}⏳ Pending{% endif %}
+                                </span>
+                            </div>
+
+                            <div class="timeline-item {% if employee.step_6_technical_setup %}completed{% elif employee.current_step == 6 %}in-progress{% endif %}">
+                                <h6>6. Install Requirements 🛠️</h6>
+                                <p class="text-muted">Set up technical dependencies</p>
+                                <span class="badge {% if employee.step_6_technical_setup %}bg-success{% else %}bg-secondary{% endif %}">
+                                    {% if employee.step_6_technical_setup %}✅ Complete{% else %}⏳ Pending{% endif %}
+                                </span>
+                            </div>
+
+                            <div class="timeline-item {% if employee.step_7_app_testing %}completed{% elif employee.current_step == 7 %}in-progress{% endif %}">
+                                <h6>7. Run Katlib 🎯</h6>
+                                <p class="text-muted">Test the application and play the game</p>
+                                <span class="badge {% if employee.step_7_app_testing %}bg-success{% else %}bg-secondary{% endif %}">
+                                    {% if employee.step_7_app_testing %}✅ Complete{% else %}⏳ Pending{% endif %}
+                                </span>
+                            </div>
+
+                            <div class="timeline-item {% if employee.step_8_first_contribution %}completed{% elif employee.current_step == 8 %}in-progress{% endif %}">
+                                <h6>8. First Contribution 🌟</h6>
+                                <p class="text-muted">Make first code contribution</p>
+                                <span class="badge {% if employee.step_8_first_contribution %}bg-success{% else %}bg-secondary{% endif %}">
+                                    {% if employee.step_8_first_contribution %}✅ Complete{% else %}⏳ Pending{% endif %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Quiz Attempts -->
+                {% if employee.quiz_attempts %}
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="mb-0">Quiz Attempts</h6>
+                    </div>
+                    <div class="card-body">
+                        {% for attempt in employee.quiz_attempts %}
+                        <div class="mb-2">
+                            <strong>{{ attempt.quiz_type|title }} Quiz</strong><br>
+                            <span class="badge {% if attempt.percentage >= 75 %}bg-success{% else %}bg-warning{% endif %}">
+                                {{ attempt.score }}/{{ attempt.total_questions }} ({{ "%.0f"|format(attempt.percentage) }}%)
+                            </span>
+                            <small class="text-muted d-block">{{ attempt.attempt_date[:16] }}</small>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Actions -->
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h6 class="mb-0">Actions</h6>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-primary btn-sm mb-2" onclick="sendReminder()">
+                            📧 Send Reminder
+                        </button>
+                        <button class="btn btn-success btn-sm mb-2" onclick="sendEncouragement()">
+                            🎉 Send Encouragement
+                        </button>
+                        <button class="btn btn-info btn-sm" onclick="resetProgress()">
+                            🔄 Reset Progress
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function sendReminder() {
+            alert('Reminder sent to {{ employee.employee_name }}!');
+        }
+
+        function sendEncouragement() {
+            alert('Encouragement message sent!');
+        }
+
+        function resetProgress() {
+            if (confirm('Are you sure you want to reset progress for {{ employee.employee_name }}?')) {
+                alert('Progress reset functionality would be implemented here.');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katbus Onboarding Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .progress-card {
+            border-left: 4px solid #6C5CE7;
+            transition: transform 0.2s;
+        }
+        .progress-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .completed {
+            border-left-color: #00CEC9;
+        }
+        .in-progress {
+            border-left-color: #F8B500;
+        }
+        .not-started {
+            border-left-color: #FF6B9D;
+        }
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .step-badge {
+            font-size: 0.8em;
+            padding: 0.25rem 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">🎵 Katbus Onboarding Dashboard</span>
+            <span class="navbar-text">Making coding as exciting as a K-pop concert!</span>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <!-- Analytics Overview -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card metric-card">
+                    <div class="card-body text-center">
+                        <h2 class="card-title">{{ analytics.total_employees }}</h2>
+                        <p class="card-text">Total Employees</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card metric-card">
+                    <div class="card-body text-center">
+                        <h2 class="card-title">{{ analytics.completed_employees }}</h2>
+                        <p class="card-text">Completed</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card metric-card">
+                    <div class="card-body text-center">
+                        <h2 class="card-title">{{ "%.1f"|format(analytics.completion_rate) }}%</h2>
+                        <p class="card-text">Completion Rate</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card metric-card">
+                    <div class="card-body text-center">
+                        <h2 class="card-title">{{ "%.1f"|format(analytics.avg_completion_days) }}</h2>
+                        <p class="card-text">Avg Days to Complete</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Step Completion Rates</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="completion-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Daily Starts</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="daily-starts-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Employee Progress Table -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Employee Progress</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            {% for employee in progress_data %}
+                            <div class="col-md-6 col-lg-4 mb-3">
+                                <div class="card progress-card 
+                                    {% if employee.completion_percentage == 100 %}completed
+                                    {% elif employee.completion_percentage > 0 %}in-progress
+                                    {% else %}not-started{% endif %}">
+                                    <div class="card-body">
+                                        <h6 class="card-title">{{ employee.employee_name }}</h6>
+                                        <div class="progress mb-2">
+                                            <div class="progress-bar" role="progressbar" 
+                                                 style="width: {{ employee.completion_percentage }}%"
+                                                 aria-valuenow="{{ employee.completion_percentage }}" 
+                                                 aria-valuemin="0" aria-valuemax="100">
+                                                {{ "%.0f"|format(employee.completion_percentage) }}%
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="badge bg-secondary step-badge">
+                                                {% if employee.current_step > 8 %}
+                                                    ✅ Complete
+                                                {% else %}
+                                                    Step {{ employee.current_step }}/8
+                                                {% endif %}
+                                            </span>
+                                            <small class="text-muted">
+                                                Started: {{ employee.start_date[:10] }}
+                                            </small>
+                                        </div>
+                                        <div class="mt-2">
+                                            <a href="/employee/{{ employee.employee_id }}" 
+                                               class="btn btn-sm btn-outline-primary">View Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load completion progress chart
+        fetch('/api/charts/completion_progress')
+            .then(response => response.json())
+            .then(data => {
+                Plotly.newPlot('completion-chart', data.data, data.layout);
+            });
+
+        // Load daily starts chart
+        fetch('/api/charts/daily_starts')
+            .then(response => response.json())
+            .then(data => {
+                Plotly.newPlot('daily-starts-chart', data.data, data.layout);
+            });
+
+        // Auto-refresh every 30 seconds
+        setInterval(() => {
+            location.reload();
+        }, 30000);
+    </script>
+</body>
+</html>

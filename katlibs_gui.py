@@ -1,8 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, scrolledtext
-import katlibs
 from tkinter import font as tkfont
-import random
 
 class KATLibsGUI:
     def __init__(self, root):
@@ -184,8 +182,8 @@ Legendary. {inputs['emoji']}
 
 def main():
     root = tk.Tk()
-    app = KATLibsGUI(root)
+    KATLibsGUI(root)
     root.mainloop()
 
 if __name__ == "__main__":
-    main() 
+    main()  
