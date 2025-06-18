@@ -51,6 +51,15 @@ It was the best day ever!
             self.assertIn("flibber", story)
             self.assertIn("Alice", story)
 
+            # Test the complete story output
+            expected_story = """
+One day, my friend Alice and I were walking through the sparkly forest.
+Suddenly, we saw a unicorn dancing near a flibber tree! It was so magical!
+We couldn't believe our eyes, so we ran all the way to Disneyland while laughing our heads off.
+It was the best day ever!
+"""
+            self.assertEqual(story.strip(), expected_story.strip())
+
     def test_story_format(self):
         """Test if the story has the correct format"""
         story = """
