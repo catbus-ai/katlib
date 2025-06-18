@@ -114,9 +114,6 @@ python dashboard.py  # Start web dashboard (localhost:5000)
 - Integration with additional team tools
 - Automated reminder and follow-up systems
 
-## Link to Devin Run
-https://app.devin.ai/sessions/f60ce269a35d4271b9c4207cc5547743
-
 ---
 
 **Requested by:** Shay Strong (shay.strong@iceye.com)  
