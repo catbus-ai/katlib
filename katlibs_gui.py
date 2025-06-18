@@ -1,13 +1,13 @@
 import tkinter as tk
 from tkinter import ttk, scrolledtext
-import madlibs
+import katlibs
 from tkinter import font as tkfont
 import random
 
-class MadLibsGUI:
+class KATLibsGUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("🎤 K-pop Concert Mad Libs 🎶")
+        self.root.title("🎤 K-pop Concert KATLibs 🎶")
         self.root.geometry("800x600")
         
         # Pink color palette
@@ -39,7 +39,7 @@ class MadLibsGUI:
         # Title with sparkle effect
         self.title_label = tk.Label(
             self.main_frame,
-            text="✨ K-pop Concert Mad Libs ✨",
+            text="✨ K-pop Concert KATLibs ✨",
             font=self.title_font,
             bg=self.colors['bg'],
             fg=self.colors['title']
@@ -160,7 +160,7 @@ Legendary. {inputs['emoji']}
 
 def main():
     root = tk.Tk()
-    app = MadLibsGUI(root)
+    app = KATLibsGUI(root)
     root.mainloop()
 
 if __name__ == "__main__":
