@@ -13,7 +13,10 @@ from typing import Dict, List, Optional
 import logging
 from dataclasses import dataclass
 
+from dotenv import load_dotenv
 from slack_bolt import App
+
+load_dotenv()
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
@@ -211,6 +214,13 @@ class OnboardingDatabase:
 
 class KatbusOnboardingBot:
     def __init__(self):
+        required_vars = ["SLACK_BOT_TOKEN", "SLACK_SIGNING_SECRET", "SLACK_APP_TOKEN"]
+        missing_vars = [var for var in required_vars if not os.environ.get(var)]
+        
+        if missing_vars:
+            raise ValueError(f"Missing required environment variables: {', '.join(missing_vars)}. "
+                           f"Please check your .env file contains these tokens.")
+        
         self.app = App(
             token=os.environ.get("SLACK_BOT_TOKEN"),
             signing_secret=os.environ.get("SLACK_SIGNING_SECRET")
