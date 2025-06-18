@@ -1,108 +1,55 @@
-# 🎤 K-pop Concert Mad Libs Adventure 🎶
+# Katlib 🎵
 
-Welcome to your first coding adventure! This is a super fun K-pop themed Mad Libs game written in Python. It's perfect for kids who want to learn programming while dreaming about their ultimate K-pop concert experience! 
+Welcome to Katlib - where coding meets K-pop creativity! This fun, interactive game helps you learn programming while creating your own K-pop inspired stories.
 
-## 🌟 What is This Game?
+## What is Katlib? 🎮
 
-This is a special K-pop themed Mad Libs game where you create an exciting story about going to a KATSEYE concert! You'll fill in different types of words to create your own unique concert adventure story. The best part? You don't know what will happen in your story until you've filled in all the words!
+Katlib is a creative coding game that combines the fun of Mad Libs with the excitement of K-pop! Instead of just filling in words, you'll learn real programming concepts while creating your own K-pop stories. It's like writing your own K-pop lyrics, but with a coding twist!
 
-## 🚀 How to Play
+## Features ✨
 
-### Command Line Version
+- 🎵 K-pop themed story templates
+- 💻 Real Python programming concepts
+- 🎨 Beautiful, kid-friendly interface
+- 🎮 Interactive gameplay
+- 📚 Educational content that's actually fun!
+
+## Getting Started 🚀
+
 1. Make sure you have Python installed on your computer
-2. Run the game by typing this in your terminal:
+2. Clone this repository
+3. Install the requirements:
    ```bash
-   python madlibs.py
+   pip install -r requirements.txt
+   ```
+4. Run the game:
+   ```bash
+   python katlib_gui.py
    ```
 
-### GUI Version (Recommended for Kids!)
-1. Make sure you have Python installed on your computer
-2. Run the colorful GUI version by typing this in your terminal:
-   ```bash
-   python madlibs_gui.py
-   ```
-3. A beautiful pink window will open where you can:
-   - Type your answers in the pink input boxes
-   - Click the sparkly "Create My Story!" button
-   - Read your story in the scrollable pink text area
+## How to Play 🎯
 
-The game will ask you for different types of words:
-- Your name
-- Your sister/friend's name
-- A city (Seoul or Tokyo)
-- An adjective to describe your mood
-- A piece of K-pop merch (like lightstick or hoodie)
-- A snack
-- A silly dance move
-- An embarrassing sound (like burp or squeak)
-- A weird object you could carry
-- A KATSEYE member's name
-- Your favorite emoji
+1. Choose a story template
+2. Fill in the blanks with your own words
+3. Watch as your story comes to life with K-pop flair!
+4. Learn coding concepts along the way
 
-After you enter all the words, the game will create a funny concert adventure story using your words!
+## Contributing 🌟
 
-## 🎯 Example
+We love contributions! Whether you're a coding newbie or a K-pop expert, there's a place for you in our community. Check out our `CONTRIBUTING.md` file to learn how you can help make Katlib even better!
 
-Here's what might happen when you play:
+## About Katbus 🏢
 
-```
-🎤 Welcome to a Mad Libs Adventure! 🎶
-Get ready to build your dream K-pop concert trip!
+Katlib is created by Katbus, a company dedicated to making coding education as exciting as a K-pop concert! Learn more about us in our `history.md` file.
 
-Enter your name: Luna
-Enter your sister/friend's name: Mia
-Choose a city (Seoul or Tokyo): Seoul
-Enter an adjective to describe your mood: excited
-Enter a piece of K-pop merch: lightstick
-Enter a snack: ramen
-Enter a silly dance move: crab dance
-Enter an embarrassing sound: squeak
-Enter a weird object you could carry: glowstick
-Enter a KATSEYE member's name: Sophia
-Enter your favorite emoji: ✨
+## License 📝
 
-💥 Your K-pop Concert Adventure 💥
-[Your unique story will appear here!]
-```
+This project is licensed under the MIT License - see the `LICENSE` file for details.
 
-## 🎨 Learning Points
+## Support 💖
 
-This game teaches you about:
-- Input and output in programming
-- String formatting
-- Variables
-- Basic Python syntax
-- How to make computers interactive
-- How to create fun, interactive stories
-- Basic GUI programming with tkinter
-
-## 🧪 Testing the Game
-
-If you want to see how the game is tested (a great way to learn about programming!), you can run:
-```bash
-python -m unittest tests.py -v
-```
-
-## 🎓 Next Steps
-
-Want to make the game even better? Here are some fun ideas:
-1. Add more K-pop groups to choose from
-2. Add concert venue options
-3. Add more chapters to the story
-4. Add colors to the text
-5. Add sound effects for the concert
-6. Create a high score system for the best stories
-7. Add more word types to make the stories even sillier!
-8. (Advanced) Connect with ChatGPT or other LLM API to make more random and adaptive stories
-
-## 🤝 Contributing
-
-Feel free to add your own K-pop concert stories or make the game more fun! This is a great project for learning how to contribute to open-source software.
-
-## 📝 License
-
-This project is open source and free to use for learning and fun!
+Need help? Found a bug? Want to suggest a new feature? Open an issue or reach out to our team!
 
 ---
 
-Made with ❤️ for young K-pop fans and coders everywhere!
+Made with 💖 by the Katbus team | Inspired by KATSEYE and Studio Ghibli
