@@ -26,30 +26,20 @@ class TestMadLibs(unittest.TestCase):
 
         # Capture the output
         with patch('sys.stdout', new=StringIO()) as fake_output:
-            # Run the main program logic
-            adjective = input("Enter an adjective: ")
-            adjective2 = input("Enter an adjective: ")
-            animal = input("Enter an animal: ")
-            place = input("Enter a place: ")
-            verb = input("Enter a verb ending in -ing: ")
-            silly_word = input("Enter a silly made-up word: ")
-            friend_name = input("Enter your friend's name: ")
-
-            story = f"""
-One day, my friend {friend_name} and I were walking through the {adjective} forest.
-Suddenly, we saw a {animal} {verb} near a {silly_word} tree! It was so {adjective2}!
-We couldn't believe our eyes, so we ran all the way to {place} while laughing our heads off.
-It was the best day ever!
-"""
-
+            # Run the main program
+            madlibs.play_madlibs()
+            
+            # Get the output
+            output = fake_output.getvalue()
+            
             # Test if the story contains all the input values
-            self.assertIn("sparkly", story)
-            self.assertIn("magical", story)
-            self.assertIn("unicorn", story)
-            self.assertIn("Disneyland", story)
-            self.assertIn("dancing", story)
-            self.assertIn("flibber", story)
-            self.assertIn("Alice", story)
+            self.assertIn("sparkly", output)
+            self.assertIn("magical", output)
+            self.assertIn("unicorn", output)
+            self.assertIn("Disneyland", output)
+            self.assertIn("dancing", output)
+            self.assertIn("flibber", output)
+            self.assertIn("Alice", output)
 
             # Test the complete story output
             expected_story = """
@@ -58,7 +48,7 @@ Suddenly, we saw a unicorn dancing near a flibber tree! It was so magical!
 We couldn't believe our eyes, so we ran all the way to Disneyland while laughing our heads off.
 It was the best day ever!
 """
-            self.assertEqual(story.strip(), expected_story.strip())
+            self.assertIn(expected_story.strip(), output)
 
     def test_story_format(self):
         """Test if the story has the correct format"""
