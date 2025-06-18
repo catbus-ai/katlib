@@ -7,7 +7,7 @@ class TestMadLibs(unittest.TestCase):
     def test_welcome_message(self):
         """Test if the welcome message is displayed correctly"""
         with patch('sys.stdout', new=StringIO()) as fake_output:
-            madlibs.print("Welcome to the Mad Libs Game! 🤪")
+            print("Welcome to the Mad Libs Game! 🤪")
             self.assertEqual(fake_output.getvalue().strip(), "Welcome to the Mad Libs Game! 🤪")
 
     @patch('builtins.input')
