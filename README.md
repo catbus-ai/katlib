@@ -93,6 +93,7 @@ Want to make the game even better? Here are some fun ideas:
 5. Add sound effects for the concert
 6. Create a high score system for the best stories
 7. Add more word types to make the stories even sillier!
+8. (Advanced) Connect with ChatGPT or other LLM API to make more random and adaptive stories
 
 ## 🤝 Contributing
 
@@ -104,4 +105,4 @@ This project is open source and free to use for learning and fun!
 
 ---
 
-Made with ❤️ for young K-pop fans and coders everywhere! Keep coding and stanning! 🚀
+Made with ❤️ for young K-pop fans and coders everywhere!
