@@ -12,8 +12,11 @@ from typing import Dict, List, Optional
 from flask import Flask, render_template, jsonify
 import plotly.graph_objs as go
 import plotly.utils
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__)
+load_dotenv()
 
 class OnboardingDashboard:
     def __init__(self, db_path: str = "onboarding.db"):
@@ -246,4 +249,5 @@ def daily_starts_chart():
     return json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    port = int(os.getenv('DASHBOARD_PORT', 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)
