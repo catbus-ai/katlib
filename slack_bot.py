@@ -515,9 +515,9 @@ class KatbusOnboardingBot:
         
         if step.validation_type == "quiz":
             if current_step == 3:
-                step_blocks.append(self.create_quiz_blocks("history", self.history_quiz))
+                step_blocks.extend(self.create_quiz_blocks("history", self.history_quiz))
             elif current_step == 4:
-                step_blocks.append(self.create_quiz_blocks("product", self.product_quiz))
+                step_blocks.extend(self.create_quiz_blocks("product", self.product_quiz))
         else:
             step_blocks.append({
                 "type": "actions",
@@ -546,7 +546,7 @@ class KatbusOnboardingBot:
         
         respond(blocks=step_blocks)
     
-    def create_quiz_blocks(self, quiz_type: str, questions: List[QuizQuestion]) -> Dict:
+    def create_quiz_blocks(self, quiz_type: str, questions: List[QuizQuestion]) -> List[Dict]:
         """Create interactive quiz blocks."""
         quiz_blocks = []
         
@@ -576,7 +576,7 @@ class KatbusOnboardingBot:
                 "elements": options
             })
         
-        return {"type": "section", "fields": quiz_blocks}
+        return quiz_blocks
     
     def show_progress(self, respond, user_id: str):
         """Show detailed progress for a user."""
