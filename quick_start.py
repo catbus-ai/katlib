@@ -11,6 +11,9 @@ import sys
 import subprocess
 import sqlite3
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def check_python_version():
     """Check if Python version is 3.8+"""
