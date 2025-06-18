@@ -8,7 +8,7 @@ class KATLibsGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("🎤 K-pop Concert KATLibs 🎶")
-        self.root.geometry("800x600")
+        self.root.geometry("900x600")
         
         # Pink color palette
         self.colors = {
@@ -21,7 +21,7 @@ class KATLibsGUI:
             'entry_bg': '#FFB6C1',  # Light pink
             'entry_fg': '#4B0082',  # Indigo
             'story_bg': '#FFE4E1',  # Misty rose
-            'story_fg': '#8B008B'  # Dark magenta
+            'story_fg': '#FF1493'  
         }
         
         self.root.configure(bg=self.colors['bg'])
@@ -33,7 +33,7 @@ class KATLibsGUI:
         self.story_font = tkfont.Font(family="Helvetica", size=12)
 
         # Create main frame with pink background
-        self.main_frame = ttk.Frame(root, padding="20")
+        self.main_frame = tk.Frame(root, bg=self.colors['bg'], padx=20, pady=20)
         self.main_frame.pack(fill=tk.BOTH, expand=True)
 
         # Title with sparkle effect
@@ -57,75 +57,63 @@ class KATLibsGUI:
         self.subtitle_label.pack(pady=10)
 
         # Input frame with pink background
-        self.input_frame = ttk.Frame(self.main_frame)
-        self.input_frame.pack(fill=tk.X, pady=20)
+        self.input_frame = tk.Frame(self.main_frame, bg=self.colors['bg'])
+        self.input_frame.pack(pady=20)
 
         # Create input fields
         self.entries = {}
-        self.create_input_field("name1", "Your name:")
-        self.create_input_field("name2", "Your sister/friend's name:")
-        self.create_input_field("city", "Choose a city (Seoul or Tokyo):")
-        self.create_input_field("adjective1", "An adjective to describe your mood:")
-        self.create_input_field("kpop_merch", "A piece of K-pop merch (e.g., lightstick, hoodie):")
-        self.create_input_field("snack", "A snack:")
-        self.create_input_field("dance_move", "A silly dance move:")
-        self.create_input_field("embarrassing_sound", "An embarrassing sound (e.g., burp, squeak):")
-        self.create_input_field("weird_object", "A weird object you could carry:")
-        self.create_input_field("idol_name", "A KATSEYE member's name:")
-        self.create_input_field("emoji", "Your favorite emoji:")
+        self.input_fields = [
+            ("name1", "Your name:"),
+            ("name2", "Your sister/friend's name:"),
+            ("city", "Choose a city (Seoul or Tokyo):"),
+            ("adjective1", "An adjective to describe your mood:"),
+            ("kpop_merch", "A piece of K-pop merch (e.g., lightstick, hoodie):"),
+            ("snack", "A snack:"),
+            ("dance_move", "A silly dance move:"),
+            ("embarrassing_sound", "An embarrassing sound (e.g., burp, squeak):"),
+            ("weird_object", "A weird object you could carry:"),
+            ("idol_name", "A KATSEYE member's name:"),
+            ("emoji", "Your favorite emoji:")
+        ]
+        for idx, (field, label) in enumerate(self.input_fields):
+            self.create_input_field(field, label, idx)
 
-        # Create story button with sparkle effect
+        # Create story button, vertically centered next to input fields
         self.create_button = tk.Button(
-            self.main_frame,
+            self.input_frame,
             text="✨ Create My Story! ✨",
             command=self.create_story,
             font=self.button_font,
             bg=self.colors['button'],
-            fg=self.colors['button_text'],
+            fg="#000000",
             relief=tk.RAISED,
             padx=20,
             pady=10,
-            cursor="heart"  # Heart cursor on hover
+            cursor="heart"
         )
-        self.create_button.pack(pady=20)
+        self.create_button.grid(row=0, column=2, rowspan=len(self.input_fields), padx=(30,0), pady=5, sticky="nsw")
 
-        # Story display with pink theme
-        self.story_text = scrolledtext.ScrolledText(
-            self.main_frame,
-            wrap=tk.WORD,
-            width=60,
-            height=10,
-            font=self.story_font,
-            bg=self.colors['story_bg'],
-            fg=self.colors['story_fg']
-        )
-        self.story_text.pack(pady=20, fill=tk.BOTH, expand=True)
-
-    def create_input_field(self, field_name, label_text):
-        frame = ttk.Frame(self.input_frame)
-        frame.pack(fill=tk.X, pady=5)
-        
+    def create_input_field(self, field_name, label_text, row):
         label = tk.Label(
-            frame,
+            self.input_frame,
             text=label_text,
             font=self.label_font,
             bg=self.colors['bg'],
             fg=self.colors['label'],
-            width=30,
+            wraplength=250,
+            justify="right",
             anchor="e"
         )
-        label.pack(side=tk.LEFT, padx=5)
-        
+        label.grid(row=row, column=0, padx=10, pady=5, sticky="e")
         entry = tk.Entry(
-            frame,
+            self.input_frame,
             font=self.label_font,
             width=30,
             bg=self.colors['entry_bg'],
             fg=self.colors['entry_fg'],
-            insertbackground=self.colors['entry_fg']  # Cursor color
+            insertbackground=self.colors['entry_fg']
         )
-        entry.pack(side=tk.LEFT, padx=5)
-        
+        entry.grid(row=row, column=1, padx=10, pady=5, sticky="w")
         self.entries[field_name] = entry
 
     def create_story(self):
@@ -154,9 +142,45 @@ As they walked back to their hotel—now minor celebrities—they looked at each
 
 Legendary. {inputs['emoji']}
 """
-        # Display the story
-        self.story_text.delete(1.0, tk.END)
-        self.story_text.insert(tk.END, story)
+        # Open a new window for the story
+        story_win = tk.Toplevel(self.root)
+        story_win.title("Your K-pop Katlib Story!")
+        story_win.configure(bg=self.colors['bg'])
+        text_widget = tk.Text(
+            story_win,
+            wrap=tk.WORD,
+            font=self.story_font,
+            bg="#FFFFFF",
+            fg="#000000",
+            width=80,
+            height=25
+        )
+        text_widget.pack(padx=20, pady=20, fill=tk.BOTH, expand=True)
+        # Insert story and highlight user words
+        start = 0
+        for key, value in inputs.items():
+            if value:
+                # Replace all occurrences with a unique marker
+                story = story.replace(value, f"[[[{key}]]]")
+        # Insert story and tag user words
+        idx = 0
+        while idx < len(story):
+            if story[idx:idx+3] == "[[[":
+                end_idx = story.find("]]]", idx)
+                if end_idx != -1:
+                    key = story[idx+3:end_idx]
+                    value = inputs.get(key, "")
+                    if value:
+                        text_widget.insert(tk.END, value, ("userword",))
+                    idx = end_idx + 3
+                else:
+                    text_widget.insert(tk.END, story[idx], ())
+                    idx += 1
+            else:
+                text_widget.insert(tk.END, story[idx], ())
+                idx += 1
+        text_widget.tag_configure("userword", foreground="#C800A1", font=("Helvetica", 12, "bold"))
+        text_widget.config(state=tk.DISABLED)
 
 def main():
     root = tk.Tk()
